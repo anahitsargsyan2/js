@@ -47,7 +47,7 @@ function Matrices(n, m) {
 
 var matrix = Matrices(14,14);
 console.log(matrix);
- var side = 50;
+ const side = 50;
  const grassArr = [];
  
  
@@ -70,6 +70,7 @@ console.log(matrix);
 
             if (matrix[y][x] == 1) {
                 fill('#0f0');
+                grassArr.push({x: x, y: y});
             }
             else if (matrix[y][x] == 0) {
                 fill('255');
