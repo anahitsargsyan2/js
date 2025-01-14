@@ -21,7 +21,7 @@ class Grass {
     chooseCellByIndex(character) {
         const found = [];
         for (let i in this.directions) {
-            if (this.directions[i][0] > 0 && this.directions[i][1] > 0) {
+            if (this.directions[i][0] >= 0 && this.directions[i][1] >= 0) {
                 //console.log('this dir', this.directions[i]);
                 var x = this.directions[i][0];
                 var y = this.directions[i][1];
@@ -49,8 +49,10 @@ class Grass {
             //console.log("nor x")
             //console.log(newX);
             const grass = new Grass(newX, newY, this.index);
+            console.log(grass);
             //console.log(grassArr);
             grassArr.push(grass);
+            matrix[newY][newX] = this.index;
         }
         this.multiplyIndex++
     }

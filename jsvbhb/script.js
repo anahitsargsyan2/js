@@ -78,10 +78,11 @@ console.log(matrix);
             const value = matrix[y][x];
 
             if (value == 1) {
-
-                fill('#0f0');
                 const gr = new Grass(x, y, 1)
-                grassArr.push(gr);             
+                grassArr.push(gr); 
+                for (let i in grassArr){
+                    fill('#0f0');
+                }
             }
 
             
