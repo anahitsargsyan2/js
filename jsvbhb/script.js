@@ -109,4 +109,4 @@ console.log(matrix);
  }
 
 //console.log("b hgdj")
-//console.log(grassArr)
+console.log(grassArr)

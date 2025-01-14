@@ -44,10 +44,10 @@ class Grass {
         //console.log(emptyCells);
         if (emptyCells.length > 0 && this.multiplyIndex >= 5) {
             //const [newX, newY] = emptyCells;
-            const newX = emptyCells[0];
-            const newY = emptyCells;
-            console.log("nor x")
-            console.log(newX);
+            const newX = emptyCells[0][0];
+            const newY = emptyCells[0][1];
+            //console.log("nor x")
+            //console.log(newX);
             const grass = new Grass(newX, newY, this.index);
             //console.log(grassArr);
             grassArr.push(grass);
