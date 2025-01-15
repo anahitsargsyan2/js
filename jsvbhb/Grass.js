@@ -22,7 +22,6 @@ class Grass {
         const found = [];
         for (let i in this.directions) {
             if (this.directions[i][0] >= 0 && this.directions[i][1] >= 0) {
-                //console.log('this dir', this.directions[i]);
                 var x = this.directions[i][0];
                 var y = this.directions[i][1];
                 if (x < matrix[0].length && y < matrix.length) {
@@ -32,7 +31,6 @@ class Grass {
                 }
             }
         }
-        //console.log(found);
         return found;
     }
 
@@ -40,7 +38,7 @@ class Grass {
 
     multiply() {
         const emptyCells = this.chooseCellByIndex(0);
-        if (emptyCells.length > 0 ) {
+        if (emptyCells.length > 0) {
             const randomCells = emptyCells[Math.floor(Math.random() * emptyCells.length)]
             const newX = randomCells[0];
             const newY = randomCells[1];

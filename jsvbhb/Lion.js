@@ -1,4 +1,4 @@
-class Rabbit {
+class Lion {
     constructor(x, y, index) {
         this.x = x;
         this.y = y;
@@ -33,15 +33,16 @@ class Rabbit {
     }
 
     eat(){
-        const grassCells = this.chooseCellByIndex(1);
+        const wolfCells = this.chooseCellByIndex(3);
+        console.log(wolfCells);
 
-        if (grassCells.length > 0){
-            const randomCells = grassCells[Math.floor(Math.random() * grassCells.length)];
+        if (wolfCells.length > 0){
+            const randomCells = wolfCells[Math.floor(Math.random() * wolfCells.length)];
             const newX = randomCells[0];
             const newY = randomCells[1];
-            const rabbit = new Rabbit(newX, newY, this.index);
-            grassCells.pop(rabbit);
-            rabbitArr.push(rabbit);
+            const lion = new Lion(newX, newY, this.index);
+            wolfCells.pop(lion);
+            lionArr.push(lion);
             matrix[newY][newX] = this.index;
         }
     }
@@ -52,8 +53,8 @@ class Rabbit {
         if (emptyCells.length > 0) {
             const newX = emptyCells[0][0];
             const newY = emptyCells[0][1];
-            const rabbit = new Rabbit(newX, newY, this.index);
-            rabbitArr.push(rabbit);
+            const lion = new Lion(newX, newY, this.index);
+            lionArr.push(lion);
             matrix[this.y][this.x] = 0;
             matrix[newY][newX] = this.index;
         }

@@ -1,4 +1,8 @@
 const grassArr = [];
+const side = 20; 
+const rabbitArr = [];
+const wolfArr = [];
+const lionArr = [];
 
 
 
@@ -8,33 +12,43 @@ function getRandNum(probabilities) {
         return 0;
     } else if (rand < probabilities[0] + probabilities[1]) {
         return 1;
-    } else {
+    } else if (rand < probabilities[0] + probabilities[1] + probabilities[2]) {
         return 2;
+    }else if (rand < probabilities[0] + probabilities[1] + probabilities[2] + probabilities[3]){
+        return 3;
+    }
+    else{
+        return 4;
     }
 };
 
 function Matrices(n, m) {
     const mat = [];
     const total = n * m;
-    const half = Math.floor(total / 1.1); 
+    const half = Math.floor(total / 1.7); 
     let count0 = 0;
     let count1 = 0;
     let count2 = 0;
+    let count3 = 0;
+    let count4 = 0;
 
     for (let j = 0; j < m; j++) {
         const arr = [];
         for (let i = 0; i < n; i++) {
    
-            const remaining = total - (count0 + count1 + count2);
+            const remaining = total - (count0 + count1 + count2 + count3 + count4);
             const prob0 = count0 < half ? (half - count0) / remaining : 0;
-            const prob1 = (1 - prob0) * 0.9;
-            const prob2 = 1 - prob0 - prob1; 
+            const prob1 = (1 - prob0) * 0.4;
+            const prob2 = (1 - prob0 - prob1) * 0.5;
+            const prob3 = (1 - prob0 - prob1 - prob2) * 0.6
+            const prob4 = 1 - prob0 - prob1 - prob2 - prob3
 
-            const arrnum = getRandNum([prob0, prob1, prob2]);
+            const arrnum = getRandNum([prob0, prob1, prob2, prob3, prob4]);
             if (arrnum === 0) count0++;
             if (arrnum === 1) count1++;
             if (arrnum === 2) count2++;
-
+            if (arrnum === 3) count3++;
+            if (arrnum === 4) count4++;
 
 
             arr.push(arrnum);
@@ -44,33 +58,23 @@ function Matrices(n, m) {
     console.log(count0);
     console.log(count1);
     console.log(count2);
+    console.log(count3);
+    console.log(count4);
     return mat;
 };
 
 
 
-var matrix = Matrices(20,20);
+const matrix = Matrices(20,20);
 console.log(matrix);
- const side = 20; 
- const rabbitArr = [];
- const emptyArr = [];
-
 
  
  function setup() {
-    //frameRate(5);
     createCanvas(matrix[0].length * side, matrix.length * side);
-    //noStroke();
-    //  const gr = new Grass(1,2,1);
-    //  const emptyCells = gr.chooseCellByIndex(0);
-    //  console.log(emptyCells);
-    // console.log("gr", gr);
-    // const emptyCell = gr.chooseCellByIndex(2)
-    // console.log('emptyCell', emptyCell)
  }
 
  function drawMatrix(y) {
-    for (var x = 0; x < matrix[y].length; x++) {
+    for (let x = 0; x < matrix[y].length; x++) {
         const value = matrix[y][x];
 
         if (value == 1) {
@@ -83,7 +87,13 @@ console.log(matrix);
 
         else if (value == 0) {
             fill('255');
-            emptyArr.push();
+        }
+        else if (value == 3) {
+            const wf = new Wolf(x, y, 3);
+            wolfArr.push(wf);
+            for (let i in wolfArr) {
+                fill("#acacac");
+            } 
         }
 
         else if (value == 2) {
@@ -91,6 +101,14 @@ console.log(matrix);
             rabbitArr.push(rb);
             for (let i in rabbitArr) {
                 fill('magenta');
+            } 
+        }
+
+        else if (value == 4) {
+            const ln = new Lion(x, y, 4);
+            rabbitArr.push(ln);
+            for (let i in lionArr) {
+                fill(color(255, 204, 0));
             } 
         }
 
@@ -102,12 +120,20 @@ console.log(matrix);
 
  function draw() {
 
-    for (var y = 0; y < matrix.length; y++) {
+    for (let y = 0; y < matrix.length; y++) {
         drawMatrix(y);
+    }
+
+    for(let i in wolfArr) {
+        wolfArr[i].move();
     }
 
     for(let i in rabbitArr) {
         rabbitArr[i].move();
+    }
+
+    for(let i in lionArr) {
+        lionArr[i].eat();
     }
 
     for(let i in grassArr) {
