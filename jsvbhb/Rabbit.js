@@ -55,7 +55,7 @@ class Rabbit {
             const newX = emptyCells[0][0];
             const newY = emptyCells[0][1];
             const rabbit = new Rabbit(newX, newY, this.index);
-            const move = new Empyt(this.x, this.y, 0);
+            const move = new Empty(this.x, this.y, 0);
             rabbitArr.pop(move);
             emptyArr.push(move);
             rabbitArr.push(rabbit);
