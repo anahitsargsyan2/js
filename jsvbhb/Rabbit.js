@@ -19,27 +19,52 @@ class Rabbit {
     chooseCellByIndex(character) {
         const found = [];
         for (let i in this.directions) {
-            var x = this.directions[i][0];
-            var y = this.directions[i][1];
-            if (matrix[y][x] == character) {
-                found.push(this.directions[i]);
+            if (this.directions[i][0] >= 0 && this.directions[i][1] >= 0) {
+                //console.log('this dir', this.directions[i]);
+                var x = this.directions[i][0];
+                var y = this.directions[i][1];
+                if (x < matrix[0].length && y < matrix.length) {
+                    if (matrix[y][x] == character) {
+                        found.push(this.directions[i]);
+                    }
+                }
             }
         }
+        //console.log(found);
         return found;
     }
 
-    move() {
-        const emptyCells = this.chooseCellByIndex(0) || this.chooseCellByIndex(1);
-        if (emptyCells > 0) {
-            const newX = emptyCells[0];
-            const newY = emptyCells[1];
+    eat(){
+        const grassCells = this.chooseCellByIndex(1);
+
+        if (grassCells.length > 0){
+            const randomCells = grassCells[Math.floor(Math.random() * grassCells.length)];
+            const newX = randomCells[0];
+            const newY = randomCells[1];
             const rabbit = new Rabbit(newX, newY, this.index);
-            rabbitArr.pop(this.x, this.y);
+            grassCells.pop(rabbit);
             rabbitArr.push(rabbit);
+            matrix[newY][newX] = this.index;
         }
-
-        
-
-
     }
+
+    move() {
+        const emptyCells = this.chooseCellByIndex(0);
+
+        if (emptyCells.length > 0) {
+            const newX = emptyCells[0][0];
+            const newY = emptyCells[0][1];
+            const rabbit = new Rabbit(newX, newY, this.index);
+            const move = new Empyt(this.x, this.y, 0);
+            rabbitArr.pop(move);
+            emptyArr.push(move);
+            rabbitArr.push(rabbit);
+            matrix[this.y][this.x] = 0;
+            matrix[newY][newX] = this.index;
+        }
+          else {
+            this.eat();
+          }
+
+  }
 }

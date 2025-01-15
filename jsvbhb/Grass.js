@@ -40,17 +40,12 @@ class Grass {
 
     multiply() {
         const emptyCells = this.chooseCellByIndex(0);
-        //console.log(this.multiplyIndex);
-        //console.log(emptyCells);
-        if (emptyCells.length > 0 && this.multiplyIndex >= 5) {
-            //const [newX, newY] = emptyCells;
-            const newX = emptyCells[0][0];
-            const newY = emptyCells[0][1];
-            //console.log("nor x")
-            //console.log(newX);
+        if (emptyCells.length > 0 ) {
+            const randomCells = emptyCells[Math.floor(Math.random() * emptyCells.length)]
+            const newX = randomCells[0];
+            const newY = randomCells[1];
             const grass = new Grass(newX, newY, this.index);
             console.log(grass);
-            //console.log(grassArr);
             grassArr.push(grass);
             matrix[newY][newX] = this.index;
         }

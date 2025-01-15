@@ -16,7 +16,7 @@ function getRandNum(probabilities) {
 function Matrices(n, m) {
     const mat = [];
     const total = n * m;
-    const half = Math.floor(total / 2); 
+    const half = Math.floor(total / 1.1); 
     let count0 = 0;
     let count1 = 0;
     let count2 = 0;
@@ -27,7 +27,7 @@ function Matrices(n, m) {
    
             const remaining = total - (count0 + count1 + count2);
             const prob0 = count0 < half ? (half - count0) / remaining : 0;
-            const prob1 = (1 - prob0) * 0.75;
+            const prob1 = (1 - prob0) * 0.9;
             const prob2 = 1 - prob0 - prob1; 
 
             const arrnum = getRandNum([prob0, prob1, prob2]);
@@ -49,15 +49,16 @@ function Matrices(n, m) {
 
 
 
-var matrix = Matrices(14,14);
+var matrix = Matrices(20,20);
 console.log(matrix);
- const side = 50; 
+ const side = 20; 
  const rabbitArr = [];
+ const emptyArr = [];
 
 
  
  function setup() {
-    frameRate(5);
+    //frameRate(5);
     createCanvas(matrix[0].length * side, matrix.length * side);
     //noStroke();
     //  const gr = new Grass(1,2,1);
@@ -68,46 +69,49 @@ console.log(matrix);
     // console.log('emptyCell', emptyCell)
  }
 
+ function drawMatrix(y) {
+    for (var x = 0; x < matrix[y].length; x++) {
+        const value = matrix[y][x];
+
+        if (value == 1) {
+            const gr = new Grass(x, y, 1);
+            grassArr.push(gr);
+            for (let i in grassArr) {
+                fill('#0f0');
+            }
+        }
+
+        else if (value == 0) {
+            fill('255');
+            emptyArr.push();
+        }
+
+        else if (value == 2) {
+            const rb = new Rabbit(x, y, 2);
+            rabbitArr.push(rb);
+            for (let i in rabbitArr) {
+                fill('magenta');
+            } 
+        }
+
+        rect(x * side, y * side, side, side);
+    }
+}
+
 
 
  function draw() {
 
     for (var y = 0; y < matrix.length; y++) {
-        for (var x = 0; x < matrix[y].length; x++) {
-
-            const value = matrix[y][x];
-
-            if (value == 1) {
-                const gr = new Grass(x, y, 1)
-                grassArr.push(gr); 
-                for (let i in grassArr){
-                    fill('#0f0');
-                }
-            }
-
-            
-            else if (value == 0) {
-                fill('255');
-            }
-            else if (value == 2){
-                fill('magenta');
-            }
-            
-         
-            rect(x * side, y * side, side, side);
-     
-     /*
-     fill("blue")
-     text(x+" "+y, x*side+side/2,y*side+side/2)
-     */	
-        }
+        drawMatrix(y);
     }
+
+    for(let i in rabbitArr) {
+        rabbitArr[i].move();
+    }
+
     for(let i in grassArr) {
-        //console.log('grsdd', grassArr[i]);
-        
-        grassArr[i].multiply()
+        grassArr[i].multiply();
     }
- }
 
-//console.log("b hgdj")
-console.log(grassArr)
+ }
