@@ -39,8 +39,8 @@ function Matrices(n, m) {
             const remaining = total - (count0 + count1 + count2 + count3 + count4);
             const prob0 = count0 < half ? (half - count0) / remaining : 0;
             const prob1 = (1 - prob0) * 0.4;
-            const prob2 = (1 - prob0 - prob1) * 0.5;
-            const prob3 = (1 - prob0 - prob1 - prob2) * 0.6
+            const prob2 = (1 - prob0 - prob1) * 0.3;
+            const prob3 = (1 - prob0 - prob1 - prob2) * 0.9
             const prob4 = 1 - prob0 - prob1 - prob2 - prob3
 
             const arrnum = getRandNum([prob0, prob1, prob2, prob3, prob4]);
@@ -55,19 +55,12 @@ function Matrices(n, m) {
         }
         mat.push(arr); 
     }
-    console.log(count0);
-    console.log(count1);
-    console.log(count2);
-    console.log(count3);
-    console.log(count4);
     return mat;
 };
 
 
 
 const matrix = Matrices(20,20);
-console.log(matrix);
-
  
  function setup() {
     createCanvas(matrix[0].length * side, matrix.length * side);
@@ -106,7 +99,7 @@ console.log(matrix);
 
         else if (value == 4) {
             const ln = new Lion(x, y, 4);
-            rabbitArr.push(ln);
+            lionArr.push(ln);
             for (let i in lionArr) {
                 fill(color(255, 204, 0));
             } 
@@ -133,7 +126,7 @@ console.log(matrix);
     }
 
     for(let i in lionArr) {
-        lionArr[i].eat();
+        lionArr[i].move();
     }
 
     for(let i in grassArr) {

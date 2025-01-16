@@ -1,66 +1,29 @@
-class Lion {
+class Lion extends Character {
     constructor(x, y, index) {
-        this.x = x;
-        this.y = y;
-        this.index = index;
-        this.directions = [
-            [this.x - 1, this.y - 1],
-            [this.x, this.y - 1],
-            [this.x + 1, this.y - 1],
-            [this.x - 1, this.y],
-            [this.x + 1, this.y],
-            [this.x - 1, this.y + 1],
-            [this.x, this.y + 1],
-            [this.x + 1, this.y + 1]
-        ];
-
-    }
-
-    chooseCellByIndex(character) {
-        const found = [];
-        for (let i in this.directions) {
-            if (this.directions[i][0] >= 0 && this.directions[i][1] >= 0) {
-                var x = this.directions[i][0];
-                var y = this.directions[i][1];
-                if (x < matrix[0].length && y < matrix.length) {
-                    if (matrix[y][x] == character) {
-                        found.push(this.directions[i]);
-                    }
-                }
-            }
-        }
-        return found;
+        super(x, y, index);
     }
 
     eat(){
-        const wolfCells = this.chooseCellByIndex(3);
-        console.log(wolfCells);
-
-        if (wolfCells.length > 0){
-            const randomCells = wolfCells[Math.floor(Math.random() * wolfCells.length)];
-            const newX = randomCells[0];
-            const newY = randomCells[1];
-            const lion = new Lion(newX, newY, this.index);
-            wolfCells.pop(lion);
-            lionArr.push(lion);
-            matrix[newY][newX] = this.index;
-        }
+        super.eat(3, Lion, lionArr, wolfArr);
     }
 
-    move() {
-        const emptyCells = this.chooseCellByIndex(0);
+    move(){
+        super.move(0, Lion, lionArr);
+        this.superpower();
+    }
 
-        if (emptyCells.length > 0) {
-            const newX = emptyCells[0][0];
-            const newY = emptyCells[0][1];
-            const lion = new Lion(newX, newY, this.index);
-            lionArr.push(lion);
-            matrix[this.y][this.x] = 0;
-            matrix[newY][newX] = this.index;
+    superpower() {
+        if (wolfArr.length > 0) {
+            const randomIndex = Math.floor(Math.random() * wolfArr.length);
+            const randomWolf = wolfArr[randomIndex];
+            
+            if (randomWolf) {
+                const newX = randomWolf.x;
+                const newY = randomWolf.y;
+                wolfArr.splice(randomIndex, 1);
+                matrix[newY][newX] = 0;
+            }
         }
-          else {
-            this.eat();
-          }
-
-  }
+        setTimeout(() => this.superpower(), 5000);
+    }
 }
