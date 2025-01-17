@@ -4,11 +4,11 @@ class Lion extends Character {
     }
 
     eat(){
-        super.eat(3, Lion, lionArr, wolfArr);
+        super.eat(WOLF_INDEX, Lion, lionArr, wolfArr);
     }
 
     move(){
-        super.move(0, Lion, lionArr);
+        super.move(EMPTY_INDEX, Lion, lionArr);
         this.superpower();
     }
 
@@ -20,6 +20,7 @@ class Lion extends Character {
             if (randomWolf) {
                 const newX = randomWolf.x;
                 const newY = randomWolf.y;
+                // const [newX, newY] = randomWolf[this.x, this.y];
                 wolfArr.splice(randomIndex, 1);
                 matrix[newY][newX] = 0;
             }

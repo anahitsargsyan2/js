@@ -37,10 +37,9 @@ class Character {
 
         if (Cells.length > 0){
             const randomCells = Cells[Math.floor(Math.random() * Cells.length)];
-            const newX = randomCells[0];
-            const newY = randomCells[1];
+            const [newX, newY] = randomCells;
             const char = new character(newX, newY, this.index);
-            delCharFromArr.pop(char);
+            delCharFromArr.pop(char); 
             array.push(char);
             matrix[newY][newX] = this.index;
         }
@@ -52,8 +51,9 @@ class Character {
         const emptyCells = this.chooseCellByIndex(index);
 
         if (emptyCells.length > 0) {
-            const newX = emptyCells[0][0];
-            const newY = emptyCells[0][1];
+            // const newX = emptyCells[0][0];
+            // const newY = emptyCells[0][1];
+            const [newX, newY] = emptyCells[0];
             const char = new character(newX, newY, this.index);
             array.push(char);
             matrix[this.y][this.x] = 0;

@@ -5,11 +5,10 @@ class Grass extends Character {
     }
 
     multiply() {
-        const emptyCells = super.chooseCellByIndex(0);
+        const emptyCells = super.chooseCellByIndex(EMPTY_INDEX);
         if (emptyCells.length > 0) {
             const randomCells = emptyCells[Math.floor(Math.random() * emptyCells.length)];
-            const newX = randomCells[0];
-            const newY = randomCells[1];
+            const [newX, newY] = randomCells;
             const grass = new Grass(newX, newY, this.index);
             grassArr.push(grass);
             matrix[newY][newX] = this.index;

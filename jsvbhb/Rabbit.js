@@ -4,10 +4,10 @@ class Rabbit extends Character {
     }
 
     eat(){
-        super.eat(1, Rabbit, rabbitArr, grassArr);
+        super.eat(GRASS_INDEX, Rabbit, rabbitArr, grassArr);
     }
 
     move() {
-        super.move(0, Rabbit, rabbitArr);
+        super.move(EMPTY_INDEX, Rabbit, rabbitArr);
     }
 }

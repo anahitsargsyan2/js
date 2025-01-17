@@ -4,10 +4,10 @@ class Wolf extends Character {
     }
 
     eat(){
-        super.eat(2, Wolf, wolfArr, rabbitArr);
+        super.eat(RABBIT_INDEX, Wolf, wolfArr, rabbitArr);
     }
 
   move(){
-    super.move(0, Wolf, wolfArr);
+    super.move(EMPTY_INDEX, Wolf, wolfArr);
   }
 }
