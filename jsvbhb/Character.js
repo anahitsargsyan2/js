@@ -39,8 +39,11 @@ class Character {
             const randomCells = Cells[Math.floor(Math.random() * Cells.length)];
             const [newX, newY] = randomCells;
             const char = new character(newX, newY, this.index);
-            delCharFromArr.pop(char); 
-            array.push(char);
+            const charIndex = delCharFromArr.findIndex(char => char.x === newX && char.y === newY);
+            console.log(charIndex);
+            if (charIndex !== -1) {
+                delCharFromArr.splice(charIndex, 1);
+            }            array.push(char);
             matrix[newY][newX] = this.index;
         }
     }

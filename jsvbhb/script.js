@@ -1,9 +1,52 @@
+let isRunning = true; 
+let winner = null; 
+
+const stopButton = document.getElementById("stopButton");
+const endButton = document.getElementById("endButton");
+
+stopButton.addEventListener("click", () => {
+    if (isRunning) {
+        isRunning = false;  
+        stopButton.textContent = "Resume";  
+        console.log("Game Stopped");
+    } else {
+        isRunning = true;  
+        stopButton.textContent = "Stop";  
+        console.log("Game Resumed");
+    }
+});
+
+endButton.addEventListener("click", () => {
+    isRunning = false;  
+    winner = determineWinner();  
+    console.log("Game Ended");
+    displayWinner(winner); 
+});
+ 
+function determineWinner() {
+    if (lionArr.length > rabbitArr.length) {
+        return "Lions win!";
+    } else if (rabbitArr.length > lionArr.length) {
+        return "Rabbits win!";
+    } 
+}
+
+function displayWinner(winner) {
+    alert(winner);  
+}
+
+
  function setup() {
     createCanvas(matrix[0].length * side, matrix.length * side);
     frameRate(1);
  }
 
  function drawMatrix(y) {
+    if (!isRunning) {
+        return;  
+    }
+
+
     for (let x = 0; x < matrix[y].length; x++) {
         const value = matrix[y][x];
 
@@ -37,7 +80,7 @@ function CreateLion(x, y) {
 
 function CreateRabbit(x, y) {
     rabbitArr.push(new Rabbit(x, y, RABBIT_INDEX));
-    fill('magenta');
+    image(rabbitImage, x * side, y * side, side, side); 
 }
 
 function CreateWolf(x, y) {
@@ -71,17 +114,4 @@ function CreateGrass(x, y) {
     for(let i in grassArr) {
         grassArr[i].multiply();
     }
-
-    // for (let y = 0; y < matrix.length; y++) {
-    //     for (let x = 0; x < matrix[y].length; x++) {
-    //         value = matrix[y][x];
-    //         //console.log(value);
-    //     }
-    // }
-
  }
-
- console.log(lionArr);
- console.log(rabbitArr);
- console.log(wolfArr.lenght);
- console.log(grassArr);
