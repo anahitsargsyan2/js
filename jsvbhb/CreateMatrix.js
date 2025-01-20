@@ -6,10 +6,9 @@ function getRandNum(probabilities) {
         return 1;
     } else if (rand < probabilities[0] + probabilities[1] + probabilities[2]) {
         return 2;
-    }else if (rand < probabilities[0] + probabilities[1] + probabilities[2] + probabilities[3]){
+    } else if (rand < probabilities[0] + probabilities[1] + probabilities[2] + probabilities[3]){
         return 3;
-    }
-    else{
+    } else{
         return 4;
     }
 };
@@ -49,7 +48,5 @@ function Matrices(n, m) {
     }
     return mat;
 };
-
-
 
 const matrix = Matrices(35,35);

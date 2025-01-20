@@ -20,7 +20,6 @@ class Lion extends Character {
             if (randomWolf) {
                 const newX = randomWolf.x;
                 const newY = randomWolf.y;
-                // const [newX, newY] = randomWolf[this.x, this.y];
                 wolfArr.splice(randomIndex, 1);
                 matrix[newY][newX] = 0;
             }

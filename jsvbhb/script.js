@@ -1,41 +1,3 @@
-let isRunning = true; 
-let winner = null; 
-
-const stopButton = document.getElementById("stopButton");
-const endButton = document.getElementById("endButton");
-
-stopButton.addEventListener("click", () => {
-    if (isRunning) {
-        isRunning = false;  
-        stopButton.textContent = "Resume";  
-        console.log("Game Stopped");
-    } else {
-        isRunning = true;  
-        stopButton.textContent = "Stop";  
-        console.log("Game Resumed");
-    }
-});
-
-endButton.addEventListener("click", () => {
-    isRunning = false;  
-    winner = determineWinner();  
-    console.log("Game Ended");
-    displayWinner(winner); 
-});
- 
-function determineWinner() {
-    if (lionArr.length > rabbitArr.length) {
-        return "Lions win!";
-    } else if (rabbitArr.length > lionArr.length) {
-        return "Rabbits win!";
-    } 
-}
-
-function displayWinner(winner) {
-    alert(winner);  
-}
-
-
  function setup() {
     createCanvas(matrix[0].length * side, matrix.length * side);
     frameRate(1);
@@ -46,51 +8,30 @@ function displayWinner(winner) {
         return;  
     }
 
-
     for (let x = 0; x < matrix[y].length; x++) {
         const value = matrix[y][x];
 
-        if (value == GRASS_INDEX) {
+        if (value === GRASS_INDEX) {
             CreateGrass(x, y);
         }
 
-        else if (value == EMPTY_INDEX) {
+        else if (value === EMPTY_INDEX) {
             fill('255');
         }
-        else if (value == WOLF_INDEX) {
+        else if (value === WOLF_INDEX) {
             CreateWolf(x, y); 
         }
 
-        else if (value == RABBIT_INDEX) {
+        else if (value === RABBIT_INDEX) {
             CreateRabbit(x, y); 
         }
 
-        else if (value == LION_INDEX) {
+        else if (value === LION_INDEX) {
             CreateLion(x, y); 
         }
 
         rect(x * side, y * side, side, side);
     }
-}
-
-function CreateLion(x, y) {
-    lionArr.push(new Lion(x, y, LION_INDEX));
-    fill(color(255, 204, 0));
-}
-
-function CreateRabbit(x, y) {
-    rabbitArr.push(new Rabbit(x, y, RABBIT_INDEX));
-    image(rabbitImage, x * side, y * side, side, side); 
-}
-
-function CreateWolf(x, y) {
-    wolfArr.push(new Wolf(x, y, WOLF_INDEX));
-    fill("#acacac");    
-}
-
-function CreateGrass(x, y) {
-    grassArr.push(new Grass(x, y, GRASS_INDEX));
-    fill('#0f0');
 }
 
  function draw() {
